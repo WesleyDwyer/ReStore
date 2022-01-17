@@ -5,7 +5,9 @@ import {history} from "../..";
 
 const sleep = () => new Promise(resolve => setTimeout(resolve, 500)); // Promise is use for Async in javascript
 
-axios.defaults.baseURL = "http://localhost:5000/api/"
+axios.defaults.baseURL = "http://localhost:5000/api/";
+axios.defaults.withCredentials = true; //needed in conjunction with the server side course
+//browser receive the cookie and set it as well
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -70,9 +72,15 @@ const Catalog = {
     details:(id: number) => requests.get(`products/${id}`)
 }
 
+const Basket = {
+    get: () => requests.get('basket'),
+    addItem: (productId: number,quantity = 1) => requests.post(`basket?productId=${productId}&quantity=${quantity}`,{}),//{} pass an empty object with request
+    removeItem: (productId: number,quantity = 1) => requests.delete(`basket?productId=${productId}&quantity=${quantity}`),
+}
 const agent = {
     Catalog,
-    TestErrors
+    TestErrors,
+    Basket
 }
 
 export default agent;

@@ -63,6 +63,7 @@ namespace API
             {
                 opt.AllowAnyHeader()
                    .AllowAnyMethod()
+                   .AllowCredentials() //allows you to pass cookies to client from different domain (production env)
                    .WithOrigins("http://localhost:3000");
             });
 
