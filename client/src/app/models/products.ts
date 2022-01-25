@@ -10,3 +10,12 @@ export interface Product{
     brand: string;
     quantityInStock?: number; //make property optional
 }
+
+export interface ProductParams{
+    orderBy: string;
+    searchTerm?: string;
+    types: string[];
+    pageNumber: number;
+    pageSize: number;
+    brands: string[];
+}
